@@ -1,0 +1,23 @@
+mat-toolbar{
+  max-height: 40px;
+}
+
+.footer-main, .footer-content {
+  width: 100%;
+  font-size: 13px;
+}
+
+.footer-text {
+  width: 94% ;
+  float: left;
+}
+
+.footer-btn {
+  width: 05% ;
+  float: left;
+
+}
+
+.footer-btn a, .footer-btn a:visited {
+  color: white !important;
+}

@@ -1,0 +1,129 @@
+<app-header class="head"></app-header>
+<div class="container-fluid">
+  <br/>
+  <h2><span *ngIf="isUserLoggedIn">Hi, {{firstName}}! </span> Welcome to Pet Finder!</h2>
+  <h3>Here are some adorable pets available for adoption!</h3>
+  <div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start stretch center"
+       fxLayoutGap="20px">
+    <mat-card [class.mat-elevation-z8]="true " class="pet-card" *ngFor="let pet of pets "
+              fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+              fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100">
+      <mat-card-header>
+        <mat-card-title><a href="/details/{{pet.id}}">{{pet.name}}</a></mat-card-title>
+        <mat-card-subtitle>{{pet.type}}</mat-card-subtitle>
+      </mat-card-header>
+      <a href="/details/{{pet.id}}">
+      <img mat-card-image src={{pet.photos[0].large}} alt="">
+      </a>
+      <mat-card-content>
+        <p>
+          {{pet.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions fxFlexAlign="end" align="end" (click)="onclick(pet.id)">
+        <button mat-button>
+          <mat-icon>favorite</mat-icon>
+
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card [class.mat-elevation-z8]="true "
+              fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+              fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100">
+      <mat-card-content>
+        <img class="card-image"
+             src="https://www.austincc.edu/sites/default/files/components/images/RS12633_20200221-EGN-Pets-198-scr-hanna.jpg"
+             alt=""></mat-card-content>
+      <mat-card-actions fxFlexAlign="center">
+        <button mat-raised-button color="accent" routerLink="/search">
+          Meet all our pets!
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div *ngIf="isUserLoggedIn">
+    <h3>Your Favorites!</h3>
+    <div [hidden]="favoritePets.length == 0" class="container-fluid" fxLayout="row wrap"
+         fxLayoutAlign="start stretch center"
+         fxLayoutGap="20px">
+      <mat-card [class.mat-elevation-z8]="true " class="pet-card" *ngFor="let pet of favoritePets"
+                fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+                fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100">
+        <mat-card-header>
+          <mat-card-title><a href="/details/{{pet.id}}">{{pet.name}}</a></mat-card-title>
+          <mat-card-subtitle>{{pet.type}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src={{pet.photos[0].large}} alt="">
+        <mat-card-content>
+          <p>
+            {{pet.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions fxFlexAlign="end" align="end" (click)="removeFavorite(pet.id)">
+          <button mat-button disabled>
+            <mat-icon [ngStyle]="{'color':'red'}">favorite</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div [hidden]="favoritePets.length > 0">No favorite pets added yet..</div>
+  </div>
+  <div>
+    <h3>Our last {{lastUsers.length}} Users</h3>
+    <div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start stretch center"
+         fxLayoutGap="20px">
+      <mat-card [class.mat-elevation-z8]="true " *ngFor="let u of lastUsers"
+                fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+                fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100">
+        <mat-card-header>
+          <mat-card-title>{{u.firstName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <img class="card-image"
+               src="https://st3.depositphotos.com/6672868/14376/v/450/depositphotos_143767633-stock-illustration-user-profile-group.jpg"
+               alt=""></mat-card-content>
+        <mat-card-actions fxFlexAlign="center">
+          <button mat-raised-button color="accent" routerLink="/profile/{{u.id}}">
+            View Profile!
+          </button>
+          &nbsp; &nbsp;
+          <button mat-raised-button color="primary" (click)="follow(u.id)">
+            <mat-icon>
+              thumb_up
+            </mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="isUserLoggedIn">
+    <h3>You are following!</h3>
+    <div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start stretch center"
+         fxLayoutGap="20px">
+      <mat-card [class.mat-elevation-z8]="true " class="pet-card" *ngFor="let u of followingUsers"
+                fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+                fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100">
+        <mat-card-header>
+          <mat-card-title>{{u.firstName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <img class="card-image"
+               src="https://st3.depositphotos.com/6672868/14376/v/450/depositphotos_143767633-stock-illustration-user-profile-group.jpg"
+               alt=""></mat-card-content>
+        <mat-card-actions fxFlexAlign="center">
+          <button mat-raised-button color="accent" routerLink="/profile/{{u.id}}">
+            View Profile!
+          </button>
+          <button mat-button disabled>
+            <mat-icon [ngStyle]="{'color':'red'}">thumb_up</mat-icon>
+          </button>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+  </div>
+
+  <app-recently-adopted></app-recently-adopted>
+</div>

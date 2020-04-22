@@ -1,0 +1,124 @@
+<app-header></app-header>
+<div class="container-fluid" fxLayout="column">
+  <div>
+    <h2 [hidden]="currentUser === null || currentUser == undefined">
+      Hello {{currentUser.firstName}} {{currentUser.lastName}}</h2>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div>
+    <h2>Adoption requests:</h2>
+    <div [hidden]="hideAdoptionRequests" class="container-fluid pet-card" fxLayout="row wrap"
+         fxLayoutAlign="start stretch center"
+         fxLayoutGap="20px">
+      <mat-card class="card-custom" [class.mat-elevation-z8]="true "
+                *ngFor="let request of adoptionRequests"
+                fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+                fxFlex.sm="0 1 calc(25% - 20px)" fxFlex.xs="100">
+        <mat-card-header>
+          <mat-card-title><a href="/details/{{request.id}}">{{request.name}}</a></mat-card-title>
+          <mat-card-subtitle>
+            <span>Status : {{request.status}}</span>
+            <br/>
+            <span>Updated on: {{request.status_changed_at.split('T')[0]}}</span>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <a href="/details/{{request.id}}">
+            <img class="card-image" x
+                 src="{{request.photos[0].large}}"
+                 alt="">
+          </a>
+        </mat-card-content>
+
+        <mat-card-actions fxFlexAlign="center">
+          <!--<button mat-raised-button color="accent" routerLink="/profile/{{request}}">
+            View Profile!
+          </button>
+          <button mat-button>
+            <mat-icon class="favorite-red">favorite</mat-icon>
+          </button>-->
+          <button mat-button *ngIf="request.status === 'REVIEW'">
+            <mat-icon (click)="deleteAdoptionRequest(request.id)">
+              delete
+            </mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div [hidden]="adoptionRequests.length > 0 || hideAdoptionRequests == false">No adoption
+      requests
+      to show! Adopt a pet today..
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div>
+    <h2>Favorite Pets: </h2>
+    <div [hidden]="favoritePets.length == 0" class="container-fluid pet-card" fxLayout="row wrap"
+         fxLayoutAlign="start stretch center"
+         fxLayoutGap="20px">
+      <mat-card class="pet-card" [class.mat-elevation-z8]="true " class="pet-card "
+                *ngFor="let pet of favoritePets "
+                fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+                fxFlex.sm="0 1 calc(25% - 20px)" fxFlex.xs="100">
+        <mat-card-header>
+          <mat-card-title><a href="/details/{{pet.id}}">{{pet.name}}</a></mat-card-title>
+          <mat-card-subtitle>{{pet.type}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <a href="/details/{{pet.id}}">
+            <img mat-card-image class="card-image" src={{pet.photos[0].large}} alt="">
+          </a>
+          <p>
+            {{pet.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions fxFlexAlign="end" align="end" (click)="removeFavorite(pet.id)">
+          <button mat-button>
+            <mat-icon class="favorite-red">favorite</mat-icon>
+
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div [hidden]="favoritePets.length > 0">No favorite pets added yet..</div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div>
+    <h2>People you are following:</h2>
+    <div [hidden]="followingUsers.length === 0" class="container-fluid pet-card" fxLayout="row wrap"
+         fxLayoutAlign="start stretch center"
+         fxLayoutGap="20px">
+      <mat-card class="pet-card" [class.mat-elevation-z8]="true "
+                *ngFor="let u of followingUsers" fxLayoutGap="10px"
+                fxLayout="column" fxFlex.md="0 1 calc(45% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+                fxFlex.sm="0 1 calc(25% - 20px)" fxFlex.xs="100">
+        <mat-card-header>
+          <mat-card-title>{{u.firstName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <img class="card-image-following"
+               src="https://st3.depositphotos.com/6672868/14376/v/450/depositphotos_143767633-stock-illustration-user-profile-group.jpg"
+               alt=""></mat-card-content>
+        <mat-card-actions fxFlexAlign="center">
+          <button mat-raised-button color="accent" routerLink="/profile/{{u.id}}">
+            View Profile!
+          </button>
+
+          <button mat-button disabled>
+            <mat-icon [ngStyle]="{'color':'red'}">thumb_up</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div [hidden]="followingUsers.length > 0">Not following any users yet..</div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+</div>

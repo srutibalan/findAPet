@@ -1,0 +1,14 @@
+<h1>Recent Adoptions</h1>
+<div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start stretch center"
+     fxLayoutGap="20px">
+  <mat-card [class.mat-elevation-z8]="true " class="pet-card"
+            fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+            fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100" *ngFor="let a of myMap.entries()">
+
+    <mat-card-header>
+      <mat-card-title> {{a[0].user.firstName}} adopted {{a[1].name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src={{a[1].photos[0].large}} alt="">
+  </mat-card>
+</div>
+<br/>

@@ -1,0 +1,54 @@
+<mat-toolbar color="primary" class="expanded-toolbar">
+    <span>
+      <button inline="true" mat-button routerLink="/"><mat-icon class="small"
+                                                                svgIcon="pet_icon"></mat-icon>
+        {{title}}</button>
+      <input type="text" class="header-search" [(ngModel)]="searchText"/>
+
+      <button mat-button>
+        <mat-icon (click)="searchAnimals()">search</mat-icon>
+      </button>
+    </span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+
+    <mat-menu #appMenu="matMenu">
+      <div *ngIf="isLogged == '1'">
+        <div *ngIf="(currentUser.role === 'FACILITATOR' || currentUser.role == 'ADMIN')">
+          <button mat-menu-item *ngIf="currentUser.role == 'ADMIN'" routerLink="/admin">
+            Add/Remove Users
+          </button>
+          <button mat-menu-item routerLink="/facilitator">
+            View Adoption Requests
+          </button>
+        </div>
+        <button mat-menu-item routerLink="/profile">
+          My Profile
+        </button>
+      </div>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="appMenu" mat-button *ngIf="isLogged == '1'">
+      Hi {{this.currentUser.firstName}}
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+
+    <div *ngIf="isLogged == '0'">
+      <button mat-button routerLink="/login">
+        <mat-icon>power_settings_new</mat-icon>
+        Login
+      </button>
+      <button mat-button mat-button routerLink="/register">
+        <mat-icon>gamepad</mat-icon>
+        Register
+      </button>
+    </div>
+    <div *ngIf="isLogged == '1'">
+      <button mat-button (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Logout
+      </button>
+    </div>
+  </div>
+
+</mat-toolbar>

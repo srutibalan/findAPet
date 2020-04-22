@@ -1,0 +1,80 @@
+<app-header class="head"></app-header>
+<div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start stretch center"
+     fxLayoutGap="20px">
+  <mat-card [class.mat-elevation-z8]="true "
+            fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+            fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100">
+    <mat-card-header>
+      <mat-card-title>
+        {{pet.name}} <br> <br>
+        {{pet.description}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <img class="card-image" x
+           src={{pet.photos[0].large}}
+           alt=""></mat-card-content>
+    <mat-card-actions fxFlexAlign="center">
+      <button mat-raised-button color="accent" routerLink="/details/{{pet.id}}">
+        View Details
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+  <mat-card [class.mat-elevation-z8]="true "
+            fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+            fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100">
+    <mat-card-header>
+      <mat-card-title>
+        {{adoptionRequest.user.firstName}} {{adoptionRequest.user.lastName}} <br> <br>
+        Email: {{adoptionRequest.user.email}} <br>
+        Address: {{adoptionRequest.user.address}} <br>
+        Phone No: {{adoptionRequest.user.phone}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <img class="card-image"
+           src="https://st3.depositphotos.com/6672868/14376/v/450/depositphotos_143767633-stock-illustration-user-profile-group.jpg"
+           alt="">
+    </mat-card-content>
+    <mat-card-actions fxFlexAlign="center">
+      <button mat-raised-button color="accent" routerLink="/profile/{{adoptionRequest.user.id}} ">
+        View Profile!
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  <br> <br> <br>
+  <mat-card class="wide">
+    <mat-card-title>
+      Status: {{adoptionRequest.status}}
+    </mat-card-title>
+    <br>
+
+    <button mat-raised-button (click)="approve(pet.id,adoptionRequest.user.id);
+     approveSnackBar(); reload() " type="submit"
+            class="mat-button-accept" [disabled]="adoptionRequest.status!=='REVIEW'">
+      Approve
+    </button>
+
+    <br>
+
+    <button mat-raised-button (click)="decline(pet.id,adoptionRequest.user.id);
+     declineSnackBar(); reload()" type="submit"
+            class="mat-button-decline" [disabled]="adoptionRequest.status!=='REVIEW'">
+      Decline
+    </button>
+    <br> <br> <br>
+
+      <button mat-raised-button routerLink="/facilitator" type="submit" color="accent">
+        Go Back
+      </button>
+
+  </mat-card>
+
+
+</div>

@@ -1,0 +1,164 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="searchForm">
+    <div class="search-form">
+      <div class="inner-form">
+        <div class="basic-search" fxLayout fxLayoutAlign="center center">
+          <mat-form-field class="search-bar">
+            <div class="input-field" fxLayout="row">
+              <input matInput id="search" type="text" placeholder="Enter the type of pet.."
+                     [(ngModel)]="searchTxt"/>
+              <button mat-button matSuffix mat-icon-button (click)="searchAnimals()">
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+      <br/>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              ADVANCED SEARCH
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <!--        <div class="advance-search">
+                    <span class="desc"></span>-->
+          <form [formGroup]="searchForm" fxLayout="column" (ngSubmit)="advancedSearch()">
+            <div class="container-fluid center-thing" fxLayout="row wrap"
+                 fxLayoutAlign="start stretch center"
+                 fxLayoutGap="20px">
+              <!--              <div class="input-field col-4 ">
+                              <div class="input-select">-->
+              <!--              <select matSelect class="search-select" data-trigger=""
+                                    name="choices-single-defaul"
+                                    [(ngModel)]="selectedType"
+                                    (change)="changeType(selectedType)">
+                              &lt;!&ndash; <option [ngValue]="">Select an animal</option>&ndash;&gt;
+                              <option [ngValue]="emptyType" selected>Select a type</option>
+                              <option *ngFor="let type of animalTypes"
+                                      [ngValue]="type">{{type.name}}</option>
+                            </select>-->
+              <mat-form-field>
+                <mat-select formControlName="selectFormPetType" placeholder="Select an animal"
+                            [(ngModel)]="selectedType"
+                            (selectionChange)="changeType($event)">
+                  <mat-option *ngFor="let type of animalTypes"
+                              [value]="type" (click)="changeType(type)">{{type.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!--                </div>
+                            </div>-->
+              <!--              <div class="input-field col-4">
+                              <select class="search-select"
+                                      data-trigger="" name="choices-single-defaul"
+                                      [(ngModel)]="selectedColor">
+                                <option [ngValue]="emptyColor">Select a color</option>
+                                <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+
+                              </select>
+                            </div>-->
+              <mat-form-field>
+                <mat-select formControlName="selectFormColor" placeholder="Select a color"
+                            [(ngModel)]="selectedColor">
+                  <mat-option *ngFor="let color of colors" [value]="color">{{color}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select formControlName="selectFormGender" placeholder="Select a Gender"
+                            [(ngModel)]="selectedGender">
+                  <mat-option [value]="selectedGender">Male</mat-option>
+                  <mat-option [value]="selectedGender">Female</mat-option>
+                  `
+                </mat-select>
+              </mat-form-field>
+              <!--              <div class="input-field col-4">
+                              <div class="input-select">
+                                <select class="search-select" data-trigger=""
+                                        name="choices-single-defaul" [(ngModel)]="selectedGender">
+                                  <option placeholder="" value="">Gender</option>
+                                  <option>Male</option>
+                                  <option>Female</option>
+                                </select>
+                              </div>
+                            </div>-->
+              <!--</div>--></div>
+            <br/>
+            <div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start stretch center"
+                 fxLayoutGap="20px">
+              <div class="input-field">
+
+                <button mat-raised-button color="accent" class="btn-delete" id="delete"
+                        (click)="resetSearch()">RESET
+                </button>
+              </div>
+              <div class="group-btn">
+                <button mat-raised-button color="accent" class="btn-search"
+                        (click)="advancedSearch()">SEARCH
+                </button>
+              </div>
+
+            </div>
+          </form>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="container-fluid">
+  <mat-divider [inset]="true" [class.mat-elevation-z5]="true"></mat-divider>
+</div>
+<br/>
+<div class="searchData" ng-show="animals.length">
+  <div>
+    <div class="items container-fluid">
+      <div>
+        <h2 class="lblHeading">Search Results:
+          <div class="result-count">
+            <span>{{animals.length}}</span> Found
+          </div>
+        </h2>
+      </div>
+      <div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start stretch center"
+           fxLayoutGap="20px">
+        <mat-card [class.mat-elevation-z8]="true " class="pet-card" *ngFor="let animal of animals"
+                  fxLayout="column" fxFlex.md="0 1 calc(25% - 20px)" fxFlex="0 1 calc(20% - 20px)"
+                  fxFlex.sm="0 1 calc(33% - 20px)" fxFlex.xs="100">
+          <mat-card-header>
+            <mat-card-title>
+              <a href="/details/{{animal.id}}">{{animal.name}}</a>
+            </mat-card-title>
+            <mat-card-subtitle>{{animal.type}}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            src="{{animal.photos.length != 0 ?  animal.photos[0].medium  : 'https://memontum.com/wp-content/uploads/2018/10/No-image-available.jpg' }}"
+            mat-card-image alt="">
+
+          <mat-card-content>
+            <p>
+              {{animal.description}}
+            </p>
+            <p class="card-text">{{animal.gender == null ? 'Not Available' : animal.gender}}</p>
+            <p class="card-text">
+              <small class="text-muted">{{animal.species}}  - {{animal.breeds.primary}}</small>
+            </p>
+            <p class="card-text">
+              <small class="text-muted">
+                Color - {{animal.colors.primary == null ? "Not Available"
+                                                        : animal.colors.primary}}</small>
+            </p>
+          </mat-card-content>
+          <mat-card-actions fxFlexAlign="end" align="end" (click)="onclick(animal.id)">
+            <button mat-button>
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+
+</div>

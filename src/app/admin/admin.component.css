@@ -1,0 +1,69 @@
+/*
+.mat-card {
+  padding: 18px !important;
+  margin-bottom: 15px;
+}
+
+.mat-card-image {
+  width: calc(100% + 18px) !important;
+  margin: 0 -12px 8px -9px !important;
+}
+
+.mat-tab-label {
+  font-size: 8px !important;
+}
+
+.mat-card-title {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
+
+.mat-card-content {
+  font-size: 10px !important;
+  min-height: 15px;
+}
+
+.pet-card {
+  margin-bottom: 15px;
+  !*min-width: 180px;
+  text-align: center;*!
+}
+
+.pet-card img {
+  height: 175px;
+  object-fit: contain;
+}
+
+.card-image {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+*/
+
+table {
+  width: 100%;
+}
+
+mat-card {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+th {
+  font-size: large;
+  font-weight: bolder;
+  color: black;
+  background-color: lightgray;
+  align-content: center;
+}
+
+h1 {
+  padding: auto;
+}
+
+.buttons-wbdv {
+  width: 65%;
+  margin: 2em auto;
+  text-align: center;
+}

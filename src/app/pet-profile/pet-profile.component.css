@@ -1,0 +1,30 @@
+.input-dark{
+  background-color: lightgray !important;
+}
+mat-card {
+  max-width: 450px;
+  margin: 2em auto;
+  text-align: center;
+}
+center{
+  text-align: center;
+}
+mat-form-field {
+  display: block;
+}
+.small{
+  height: 50px;
+  width: 50px;
+  white-space: normal;
+}
+head {
+  flex-shrink: 0;
+}
+.body{
+  flex-grow: 1;
+  overflow: auto;
+  min-height: 2em;
+}
+foot{
+  flex-shrink: 0;
+}

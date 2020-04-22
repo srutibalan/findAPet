@@ -1,0 +1,59 @@
+<app-header></app-header>
+<ngb-alert *ngIf="staticAlertClosed" (close)="staticAlertClosed = false" type="success">Your
+  Adoption request has been posted!
+</ngb-alert>
+
+<div class="container-fluid">
+  <mat-card><h1>Animal Details: </h1>
+    <div fxLayout="row" fxLayoutGap="40px">
+      <div *ngIf="!(animal.photos ==null)" fxFlex="50%">
+        <ngb-carousel #carousel [interval]="1000" [pauseOnHover]="pauseOnHover"
+                      (slide)="onSlide($event)">
+          <ng-template ngbSlide *ngFor="let img of animal.photos; index as i">
+            <div class="carousel-caption">
+              <h3>{{animal.name}}'s {{i + 1}} photo</h3>
+            </div>
+            <div class="picsum-img-wrapper">
+              <img [src]="img.large" alt="My image {{i + 1}} description"></div>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <div fxLayout="column" class="container-fluid" fxFlex="50%">
+        <h3><b>Animal Name:</b></h3>
+        <div class="mat-body-1">{{animal.name}}</div>
+        <h3><b>Animal Breed:</b></h3>
+        {{animal.species}} - {{animal.breeds.primary}}
+        <h3><b>Animal Color:</b></h3>
+        {{animal.colors.primary == null ? "Not Available" :
+          animal.colors.primary}}
+        <h3><b>Animal Age:</b></h3>
+        {{animal.age}}
+        <h3><b>Animal Gender:</b></h3>
+        {{animal.gender}}
+        <h3><b>Animal Attributes:</b></h3>
+        House trained : {{animal.attributes.house_trained == true ? 'Yes' :
+                          'No'}}
+        <br/>
+        Any special needs : {{animal.attributes.special_needs == true ? 'Yes' :
+                              'No'}}
+        <h3><b>Animal Qualities:</b></h3>
+        <span *ngFor="let tag of animal.tags">{{tag}}</span>
+
+        <h3><b>Animal Status:</b></h3>
+        <div class="hotelDetText">{{animal.status}}</div>
+        <h3><b>Contact:</b></h3>
+        <div>{{animal.contact.email}}</div>
+        <div>{{animal.contact.phone}}</div>
+        <h3><b>Address:</b></h3>
+        <div>City: {{animal.contact.address.city}}</div>
+        <div>Zip: {{animal.contact.address.postcode}}</div>
+        <hr/>
+        <div fxFlexAlign="space-around center" class="center-thing">
+          <button mat-raised-button color="accent" (click)="adoptAnimal()" [disabled]="adopted">
+            Adopt
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

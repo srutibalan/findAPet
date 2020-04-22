@@ -1,0 +1,62 @@
+<app-header class="head"></app-header>
+﻿<mat-card>
+  <mat-card-content>
+    <form [formGroup]="petForm" fxLayout="column" (ngSubmit)="OnSubmit()">
+      <h2>Pet create</h2>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Pet Name" type="text"
+               formControlName="petName"
+               [(ngModel)]="petName" required>
+        <mat-error>
+          Please provide a Pet Name!
+        </mat-error>
+      </mat-form-field>
+<!--      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Pet Type" type="text"
+               formControlName="petType"
+               [(ngModel)]="PetType" required>
+        <mat-error>
+          Please provide a Pet Type!
+        </mat-error>
+      </mat-form-field>-->
+      <mat-form-field>
+        <mat-select formControlName="petType" placeholder="Select an animal"
+                    [(ngModel)]="petType">
+          <mat-option *ngFor="let type of animalTypes"
+                      [value]="type">{{type.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Pet Color" formControlName="petColor" [(ngModel)]="petColor"
+               required>
+        <mat-error>
+          Please provide a Pet Color!
+        </mat-error>
+      </mat-form-field>
+
+<!--
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Pet Gender" formControlName="gender" [(ngModel)]="gender"
+               required>
+        <mat-error>
+          Please provide a Pet Gender!
+        </mat-error>
+      </mat-form-field>
+-->
+      <mat-form-field>
+        <mat-select formControlName="gender" placeholder="Select a Gender"
+                    [(ngModel)]="gender">
+          <mat-option [value]="genders[0]">Male</mat-option>
+          <mat-option [value]="genders[1]">Female</mat-option>
+          `
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Image Url" formControlName="imageUrl" [(ngModel)]="imageUrl">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <button mat-raised-button color="primary" class="btn-block" (click)="OnSubmit()">Create A Pet</button>
+</mat-card>

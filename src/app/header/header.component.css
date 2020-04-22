@@ -1,0 +1,28 @@
+
+.expanded-toolbar {
+  justify-content: space-between;
+  align-items: center;
+}
+.small{
+  height: 40px;
+  width: 50px;
+  white-space: normal;
+}
+
+.header-search {
+  color: black;
+}
+*::placeholder {
+  /* modern browser */
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: gray;
+}
+
+.mat-input-element {
+  width: 30%;
+  background-color: white !important;
+  color: black;
+}
+
+

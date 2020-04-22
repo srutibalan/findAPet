@@ -1,0 +1,89 @@
+<app-header class="head"></app-header>
+<div class="container-fluid">
+  <mat-card>
+    <div>
+      <h1>PROFILE</h1> <br>
+    </div>
+    <mat-card-content>
+
+      <div fxLayout="row" fxLayoutGap="100px">
+        <div fxFlex="50%">
+          <form [formGroup]="profileForm" (ngSubmit)="OnSubmit()">
+            <mat-form-field appearance="outline" class="full-width-input">
+              <label>First Name</label>
+              <input matInput [(ngModel)]="otherUser.firstName" formControlName="firstName"
+                     type="text" readonly="{{otherUser.id != currentUser.id && currentUser.role != 'ADMIN'}}">
+              <mat-error>
+                Please provide a first name!
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width-input">
+              <label>Last Name</label>
+              <input matInput [(ngModel)]="otherUser.lastName" formControlName="lastName"
+                     type="text" readonly="{{otherUser.id != currentUser.id && currentUser.role != 'ADMIN'}}">
+              <mat-error>
+                Please provide a last name!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="">
+              <label>Email</label>
+              <input matInput [(ngModel)]="otherUser.email" formControlName="email" type="text" readonly="{{otherUser.id != currentUser.id && currentUser.role != 'ADMIN'}}">
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="myProfile || adminloggedIn" class="">
+              <label>Password</label>
+              <input matInput class="input-dark" value="{{otherUser.password}}" readonly="readonly"
+                     type="text">
+            </mat-form-field>
+            <button class="btn-profile" *ngIf="myProfile || adminloggedIn" mat-raised-button
+                    color="primary" (click)="OnSubmit()">
+              Save Profile
+            </button>
+          </form>
+
+        </div>
+        <div fxFlex="50%">
+          <form [formGroup]="profileForm" (ngSubmit)="OnSubmit()">
+            <mat-form-field appearance="outline" class="full-width-input">
+              <label>Phone</label>
+              <input matInput [(ngModel)]="otherUser.phone" formControlName="phone" type="text" readonly="{{otherUser.id != currentUser.id && currentUser.role != 'ADMIN'}}">
+              <mat-error>
+                Please provide a Phone Number!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" *ngIf="myProfile || adminloggedIn" class="">
+              <label>Address</label>
+              <input matInput [(ngModel)]="otherUser.address" formControlName="address" type="text" readonly="{{otherUser.id != currentUser.id && currentUser.role != 'ADMIN'}}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="">
+              <label>Username</label>
+              <input matInput class="input-dark" value="{{otherUser.username}}" readonly="readonly">
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="myProfile || adminloggedIn" class="" >
+              <label>Role</label>
+              <input matInput class="input-dark" value="{{otherUser.role}}" readonly="readonly">
+            </mat-form-field>
+
+          <!--  <div style="text-align: start">
+              <label>Adoption Details: </label>
+              <ul>
+                <li *ngFor="let k of displayPets">
+                  {{k}}
+                </li>
+              </ul>
+            </div>-->
+
+          </form>
+
+          <button [hidden]="showMoreDetails == false" mat-raised-button color="accent"
+                  routerLink="/customer/details">View more details
+          </button>
+        </div>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

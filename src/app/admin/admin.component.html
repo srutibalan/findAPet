@@ -1,0 +1,142 @@
+<app-header class="head"></app-header>
+<br>
+<div fxLayout="row" fxLayoutGap="100px">
+  <div fxFlex="100%">
+  <mat-card class="buttons-wbdv">
+  <button mat-raised-button color="warn" routerLink="/register">
+    ADD USER
+  </button>
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <button mat-raised-button color="warn" routerLink="/pet-create">
+    ADD PET
+  </button>
+  </mat-card>
+  </div>
+</div>
+
+<br>
+<br>
+<div class="container-fluid">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1>
+          <br>All Registered Users<br>
+        </h1>
+        <br>
+      </mat-panel-title>
+      <br>
+    </mat-expansion-panel-header>
+
+    <mat-card>
+      <div class="mat-elevation-z8">
+
+        <table mat-table [dataSource]="users">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> First Name (username)</th>
+            <mat-card>
+              <td mat-cell *matCellDef="let user">
+                {{user.firstName}} ({{user.username}})
+              </td>
+            </mat-card>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef> Role</th>
+            <td mat-cell *matCellDef="let user"> {{user.role}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions</th>
+            <td mat-cell *matCellDef="let user">
+              <button mat-raised-button color="accent" routerLink="/profile/{{user.id}}">
+                View
+              </button>
+              <button mat-button (click)="deleteUser(user)" *ngIf="user.id !== currentUser.id">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+    </mat-card>
+  </mat-expansion-panel>
+</div>
+
+<br>
+<br>
+<div class="container-fluid">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1>
+          <br>Added pets <br>
+        </h1>
+        <br>
+      </mat-panel-title>
+      <br>
+    </mat-expansion-panel-header>
+
+    <mat-card>
+      <div class="mat-elevation-z8">
+
+        <table mat-table [dataSource]="pets">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Pet Name</th>
+            <mat-card>
+              <td mat-cell *matCellDef="let pet">
+                {{pet.petName}}
+              </td>
+            </mat-card>
+          </ng-container>
+
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef> Gender</th>
+            <td mat-cell *matCellDef="let pet">
+              {{pet.gender}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Type</th>
+            <td mat-cell *matCellDef="let pet">
+              {{pet.petType}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef> Color</th>
+            <td mat-cell *matCellDef="let pet">
+              {{pet.petColor}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions</th>
+            <td mat-cell *matCellDef="let pet">
+              <button mat-raised-button color="accent" routerLink="/pet-profile/{{pet.id}}">
+                View
+              </button>
+              <button mat-button (click)="deletePet(pet)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsPets; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsPets;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+    </mat-card>
+  </mat-expansion-panel>
+</div>

@@ -1,0 +1,62 @@
+.mat-card {
+  padding: 18px !important;
+  margin-bottom: 15px;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.center-thing {
+
+  text-align: center;
+}
+
+.search-bar {
+  width: 40%;
+  text-align: center;
+}
+
+mat-chip {
+  width: 50%;
+}
+
+matInput {
+  text-align: center;
+}
+
+.mat-card-image {
+  width: calc(100% + 18px) !important;
+  margin: 0 -12px 8px -9px !important;
+}
+
+.mat-tab-label {
+  font-size: 8px !important;
+}
+
+.mat-card-title {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
+
+.mat-card-content {
+  font-size: 10px !important;
+  min-height: 15px;
+}
+
+.pet-card {
+  margin-bottom: 15px;
+  /*min-width: 180px;
+  text-align: center;*/
+}
+
+.pet-card img {
+  height: 175px;
+  object-fit: contain;
+}
+
+.card-image {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}

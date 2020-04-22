@@ -1,0 +1,44 @@
+<app-header class="head"></app-header>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="petProfileForm" (ngSubmit)="OnSubmit()">
+      <h2>Pet Profile</h2>
+      <mat-form-field class="full-width-input">
+        <label>Pet Name</label>
+        <input matInput [(ngModel)]="pet.petName" formControlName="petName" type="text">
+        <mat-error>
+          Please provide a pet name!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <label>Pet Type</label>
+        <input matInput [(ngModel)]="pet.petType" formControlName="petType" type="text">
+        <mat-error>
+          Please provide a pet type!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <label>Pet Color</label>
+        <input matInput [(ngModel)]="pet.petColor" formControlName="petColor" type="text">
+        <mat-error>
+          Please provide a pet color!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width-input">
+        <label>Pet Gender</label>
+        <input matInput [(ngModel)]="pet.gender" formControlName="gender" type="text">
+        <mat-error>
+          Please provide a pet gender!
+        </mat-error>
+      </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <label>Image URL</label>
+          <input matInput [(ngModel)]="pet.imageUrl" formControlName="imageUrl" type="text">
+        </mat-form-field>
+      <button mat-raised-button color="primary">Edit Pet Profile</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+

@@ -1,0 +1,45 @@
+.mat-card {
+  padding: 18px !important;
+  margin-bottom: 15px;
+  display:flex;
+  flex-direction: column;
+}
+
+.mat-card-image {
+  width: calc(100% + 18px) !important;
+  margin: 0 -12px 8px -9px !important;
+}
+
+.mat-tab-label {
+  font-size: 8px !important;
+}
+
+.mat-card-title {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  flex-shrink: 0;
+}
+
+.mat-card-content {
+  font-size: 10px !important;
+  min-height: 15px;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.pet-card {
+  margin-bottom: 15px;
+  /*min-width: 180px;
+  text-align: center;*/
+}
+
+.pet-card img {
+  height: 200px;
+  object-fit: contain;
+}
+
+.card-image {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}

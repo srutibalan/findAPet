@@ -1,0 +1,77 @@
+<!--<ul class="list-group">
+  <li *ngFor="let request of adoptionRequests"
+      class="list-group-item">
+      {{request.petId}}
+    {{request.userDuplicateId}}
+    {{request.status}}
+  </li>
+</ul>-->
+
+
+<!--
+<div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start stretch center"
+     fxLayoutGap="20px">
+  <mat-card [class.mat-elevation-z8]="true " *ngFor="let request of adoptionRequests"
+           >
+    <mat-card-header>
+      <mat-card-title>{{request.status}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      {{request.petId}}
+      {{request.userDuplicateId}}
+    </mat-card-content>
+    <mat-card-actions fxFlexAlign="center">
+&lt;!&ndash;      <button mat-raised-button color="accent" routerLink="/profile/{{u.id}}">
+        View Profile!
+      </button>&ndash;&gt;
+    </mat-card-actions>
+  </mat-card>
+</div>
+-->
+<app-header class="head"></app-header>
+<mat-card>
+  <div class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="adoptionRequests">
+
+      <ng-container matColumnDef="petId">
+        <th mat-header-cell *matHeaderCellDef> PET ID </th>
+        <mat-card>
+          <td mat-cell *matCellDef="let element">
+              {{element.petId}}
+          </td>
+        </mat-card>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef> USER</th>
+        <td mat-cell *matCellDef="let element"> {{element.user.firstName}} {{element.user.lastName}}</td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>
+          <b> STATUS </b>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <a routerLink="/facilitator/request/{{element.petId}}/{{element.userDuplicateId}}">
+          {{element.status}}
+          </a>
+        </td>
+      </ng-container>
+
+      <!--  &lt;!&ndash; Symbol Column &ndash;&gt;
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef> Symbol </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>-->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</mat-card>
+
